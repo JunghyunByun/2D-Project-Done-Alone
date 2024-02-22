@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Callbacks;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -25,6 +26,7 @@ public class PlayerController : MonoBehaviour
         transform.Translate(GetHorizontal() * speed * Time.deltaTime, 0f, 0f);
 
         Jump();
+        Dash();
         Animation(GetHorizontal());
     }
 
@@ -37,6 +39,15 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("isJump", isJump);
 
             playerRigid.velocity = new Vector2(0f, Mathf.Pow(speed, 2f));
+        }
+    }
+
+    private void Dash()
+    {
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            if (playerSpriteRenderer.flipX) playerRigid.AddForce(Vector2.left * Mathf.Pow(speed, 4.5f), ForceMode2D.Force);
+            else playerRigid.AddForce(Vector2.right * Mathf.Pow(speed, 4.5f), ForceMode2D.Force);
         }
     }
 
