@@ -227,13 +227,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   size: 20
   attackSize: 12.5
-  speed: 2.5
+  speed: 5
   HP: 100
   attackDelay: 5
-  raySize: 2.5
+  raySize: 3
   groundSize: 8.5
-  getAwaySize: 5
   layerMask:
     serializedVersion: 2
     m_Bits: 64
-  myfocus: {fileID: 114866968193395309}
+  getAwaySize: 5
+  myFocus: {fileID: 114866968193395309}

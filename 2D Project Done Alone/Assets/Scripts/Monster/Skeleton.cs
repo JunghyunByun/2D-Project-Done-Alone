@@ -6,8 +6,10 @@ public class Skeleton : LongDistanceMonster
 {
     protected override void Start()
     {
-        prefabName = "Arrow";
-
         base.Start();
+    }
+    protected override void FixedUpdate()
+    {
+        base.FixedUpdate();
     }
 }
