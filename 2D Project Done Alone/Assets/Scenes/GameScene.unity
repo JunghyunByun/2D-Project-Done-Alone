@@ -1230,6 +1230,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1625570851}
   m_CullTransparentMesh: 1
+--- !u!1 &1852417049 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 471326777999040193, guid: 24f0c36946ac0485386f0ee7fdd88bcc, type: 3}
+  m_PrefabInstance: {fileID: 5486564485180237532}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1898848743
 GameObject:
   m_ObjectHideFlags: 0
@@ -25701,6 +25706,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114866968193395309, guid: 24f0c36946ac0485386f0ee7fdd88bcc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 1905453204643420521, guid: 24f0c36946ac0485386f0ee7fdd88bcc, type: 3}
+      propertyPath: focus
+      value: 
+      objectReference: {fileID: 1852417049}
     - target: {fileID: 1905453204643420521, guid: 24f0c36946ac0485386f0ee7fdd88bcc, type: 3}
       propertyPath: awayRange
       value: 5
@@ -25813,26 +25826,6 @@ PrefabInstance:
     - target: {fileID: 6392683974587669195, guid: 3a7b37756ff704dbeb451ea07f5ccce2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7352455090251050152, guid: 3a7b37756ff704dbeb451ea07f5ccce2, type: 3}
-      propertyPath: speed
-      value: 7.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7352455090251050152, guid: 3a7b37756ff704dbeb451ea07f5ccce2, type: 3}
-      propertyPath: wallRange
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7352455090251050152, guid: 3a7b37756ff704dbeb451ea07f5ccce2, type: 3}
-      propertyPath: chaseRange
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 7352455090251050152, guid: 3a7b37756ff704dbeb451ea07f5ccce2, type: 3}
-      propertyPath: attackRange
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7352455090251050152, guid: 3a7b37756ff704dbeb451ea07f5ccce2, type: 3}
-      propertyPath: groundRange
-      value: 8.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

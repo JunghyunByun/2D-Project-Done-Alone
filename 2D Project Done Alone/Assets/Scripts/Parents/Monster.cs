@@ -4,9 +4,9 @@ using UnityEngine;
 
 public abstract class Monster : MonoBehaviour
 {
-    [SerializeField] protected float speed, chaseRange, attackRange, wallRange, groundRange;
+    [SerializeField] protected float speed, HP, chaseRange, attackRange, wallRange, groundRange;
     [SerializeField] protected LayerMask layerMask;
-    protected enum State { IDLE, CHASE, ATTACK, GETAWAY }
+    protected enum State { IDLE, CHASE, ATTACK, GETAWAY, DIE }
     protected State state;
     protected RaycastHit2D rightGroundHit, leftGroundHit;
     protected Vector3 playerPos;
@@ -30,9 +30,13 @@ public abstract class Monster : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
+        Debug.Log(HP);
+
         playerPos = GameObject.Find("Player").transform.position;
 
         sprite.flipX = playerPos.x > transform.position.x ? false : true;
+
+        if (HP <= 0) state = State.DIE;
 
         switch (state)
         {
@@ -40,6 +44,7 @@ public abstract class Monster : MonoBehaviour
             case State.CHASE : CHASE(); break;
             case State.ATTACK : StartCoroutine(ATTACK()); break;
             case State.GETAWAY : GETAWAY(); break;
+            case State.DIE : DIE(); break;
             default : break;
         }
     }
@@ -52,9 +57,26 @@ public abstract class Monster : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 
+    protected void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Sword1")) 
+        {
+            sprite.color = Color.red;
+            HP -= GameManager.Instance.playerDamage;
+            StartCoroutine(ResetColorAfterDelay());
+        }
+    }
+
+    protected IEnumerator ResetColorAfterDelay()
+    {
+        yield return new WaitForSeconds(0.25f);
+        sprite.color = Color.white;
+    }
+
     protected abstract void IDLE();
     protected abstract void CHASE();
     protected abstract IEnumerator ATTACK(); 
     protected abstract void Detection();
+    protected abstract void DIE();
     protected virtual void GETAWAY() { }
 }

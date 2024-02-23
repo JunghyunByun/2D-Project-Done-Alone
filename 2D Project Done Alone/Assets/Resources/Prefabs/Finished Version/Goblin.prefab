@@ -193,13 +193,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2771c69764d7040f884ed749188a6118, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  size: 12.5
-  attackSize: 3
-  speed: 5
+  speed: 7.5
   HP: 100
-  attackDelay: 1
-  raySize: 3
-  groundSize: 10
+  chaseRange: 15
+  attackRange: 2.5
+  wallRange: 3
+  groundRange: 8.5
   layerMask:
     serializedVersion: 2
     m_Bits: 64

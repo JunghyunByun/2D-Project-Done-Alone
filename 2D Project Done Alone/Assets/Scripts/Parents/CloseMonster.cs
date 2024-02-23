@@ -8,7 +8,7 @@ public class CloseMonster : Monster
     {
         Collider2D hitRange = Physics2D.OverlapCircle(transform.position, chaseRange, layerMask);
 
-        if (hitRange == null) animator.Play("Goblin_Idle");
+        if (hitRange == null) animator.Play("Idle");
 
         state = hitRange != null ? State.CHASE : State.IDLE;
     }
@@ -18,7 +18,7 @@ public class CloseMonster : Monster
 
         if (hitRange == null)
         {
-            animator.Play("Goblin_Run");
+            animator.Play("Run");
 
             Detection();
         } 
@@ -26,7 +26,7 @@ public class CloseMonster : Monster
     }
     protected override IEnumerator ATTACK()
     {
-        animator.Play("Goblin_Attack");
+        animator.Play("Attack");
 
         yield return new WaitForSeconds(0.5f);
         
@@ -60,14 +60,20 @@ public class CloseMonster : Monster
         if (sprite.flipX)
         {
             if (leftGroundHit.collider != null) transform.position = Vector3.MoveTowards(transform.position, playerPos, speed * Time.deltaTime);
-            else animator.Play("Goblin_Idle");
+            else animator.Play("Idle");
         }
         else
         {
             if (rightGroundHit.collider != null) transform.position = Vector3.MoveTowards(transform.position, playerPos, speed * Time.deltaTime);
-            else animator.Play("Goblin_Idle");
+            else animator.Play("Idle");
         }
 
         if (rightHit.collider != null || leftHit.collider != null) rigid.velocity = new Vector2(0f, 7f);
+    }
+
+    protected override void DIE()
+    {
+        animator.Play("Die");
+        Destroy(gameObject, 5f);
     }
 }
