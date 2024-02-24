@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Callbacks;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -9,6 +8,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D playerRigid;
     private Animator animator;
     public SpriteRenderer playerSpriteRenderer;
+    private Collider2D playerCollider2D;
     protected float playerX;
     private bool isJump;
     
@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
         playerRigid = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         playerSpriteRenderer = GetComponent<SpriteRenderer>();
+        playerCollider2D = GetComponent<Collider2D>();
     }
 
     protected float GetHorizontal() { return Input.GetAxisRaw("Horizontal"); }
@@ -26,7 +27,7 @@ public class PlayerController : MonoBehaviour
         transform.Translate(GetHorizontal() * speed * Time.deltaTime, 0f, 0f);
 
         Jump();
-        Dash();
+        StartCoroutine(Dash());
         Animation(GetHorizontal());
     }
 
@@ -42,12 +43,21 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Dash()
+    private IEnumerator Dash()
     {
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            if (playerSpriteRenderer.flipX) playerRigid.AddForce(Vector2.left * Mathf.Pow(speed, 4.5f), ForceMode2D.Force);
-            else playerRigid.AddForce(Vector2.right * Mathf.Pow(speed, 4.5f), ForceMode2D.Force);
+            Vector2 direction = playerSpriteRenderer.flipX ? Vector2.left : Vector2.right;
+
+            playerRigid.gravityScale = 0f;
+            playerCollider2D.enabled = false;
+
+            playerRigid.AddForce(direction * Mathf.Pow(speed, 2f), ForceMode2D.Force);
+            
+            yield return new WaitForSeconds(0.25f);
+
+            playerRigid.gravityScale = 9.8f;
+            playerCollider2D.enabled = true;
         }
     }
 

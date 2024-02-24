@@ -1,19 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class CloseMonster : Monster
 {
+    [SerializeField] protected float time;
+
     protected override void IDLE()
     {
-        isAttack = true;
-
         Collider2D hitRange = Physics2D.OverlapCircle(transform.position, chaseRange, layerMask);
 
         if (hitRange == null) animator.Play("Idle");
 
         state = hitRange != null ? State.CHASE : State.IDLE;
     }
+
     protected override void CHASE()
     {
         Collider2D hitRange = Physics2D.OverlapCircle(transform.position, attackRange, layerMask);
@@ -24,14 +26,26 @@ public class CloseMonster : Monster
 
             Detection();
         }
-        state = hitRange != null ? State.ATTACK : State.IDLE;
+        else state = State.ATTACK;
     }
 
     protected override void ATTACK()
     {
-        isAttack = false;
+        if (!isAttack)
+        {
+            isAttack = true;
 
+            StartCoroutine(AttackCoolDown());
+        }
+    }
+
+   protected IEnumerator AttackCoolDown()
+    {
         animator.Play("Attack");
+        
+        yield return new WaitForSeconds(time);
+
+        isAttack = false;
 
         state = State.IDLE;
     }
@@ -78,6 +92,7 @@ public class CloseMonster : Monster
     protected override void DIE()
     {
         animator.Play("Die");
+
         Destroy(gameObject, 5f);
     }
 }

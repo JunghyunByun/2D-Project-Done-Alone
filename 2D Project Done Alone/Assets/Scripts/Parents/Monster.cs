@@ -24,26 +24,21 @@ public abstract class Monster : MonoBehaviour
         state = State.IDLE;
     }
 
-    protected virtual void Start()
-    {
-        Init();
-    }
-
+    protected virtual void Start() => Init();
+    
     protected virtual void FixedUpdate()
     {
-        Debug.Log(HP);
-
         if (isGetAway) playerPos = GameObject.Find("Player").transform.position;
 
         sprite.flipX = playerPos.x > transform.position.x ? false : true;
 
         if (HP <= 0) state = State.DIE;
-
+        
         switch (state)
         {
             case State.IDLE : IDLE(); break;
             case State.CHASE : CHASE(); break;
-            case State.ATTACK : if (isAttack) ATTACK(); break;
+            case State.ATTACK : if (!isAttack) ATTACK(); break;
             case State.GETAWAY : GETAWAY(); break;
             case State.DIE : DIE(); break;
             default : break;
