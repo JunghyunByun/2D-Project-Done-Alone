@@ -8,6 +8,7 @@ TagManager:
   - Sword1
   - Sword2
   - Sword3
+  - Arrow
   layers:
   - Default
   - TransparentFX

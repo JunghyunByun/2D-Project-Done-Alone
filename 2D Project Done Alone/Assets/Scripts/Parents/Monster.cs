@@ -13,6 +13,7 @@ public abstract class Monster : MonoBehaviour
     protected SpriteRenderer sprite;
     protected Rigidbody2D rigid;
     protected Animator animator;
+    protected bool isAttack, isGetAway;
 
     protected void Init()
     {
@@ -32,7 +33,7 @@ public abstract class Monster : MonoBehaviour
     {
         Debug.Log(HP);
 
-        playerPos = GameObject.Find("Player").transform.position;
+        if (isGetAway) playerPos = GameObject.Find("Player").transform.position;
 
         sprite.flipX = playerPos.x > transform.position.x ? false : true;
 
@@ -42,7 +43,7 @@ public abstract class Monster : MonoBehaviour
         {
             case State.IDLE : IDLE(); break;
             case State.CHASE : CHASE(); break;
-            case State.ATTACK : StartCoroutine(ATTACK()); break;
+            case State.ATTACK : if (isAttack) ATTACK(); break;
             case State.GETAWAY : GETAWAY(); break;
             case State.DIE : DIE(); break;
             default : break;
@@ -75,7 +76,7 @@ public abstract class Monster : MonoBehaviour
 
     protected abstract void IDLE();
     protected abstract void CHASE();
-    protected abstract IEnumerator ATTACK(); 
+    protected abstract void ATTACK(); 
     protected abstract void Detection();
     protected abstract void DIE();
     protected virtual void GETAWAY() { }

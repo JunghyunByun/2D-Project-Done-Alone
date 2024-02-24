@@ -6,6 +6,8 @@ public class CloseMonster : Monster
 {
     protected override void IDLE()
     {
+        isAttack = true;
+
         Collider2D hitRange = Physics2D.OverlapCircle(transform.position, chaseRange, layerMask);
 
         if (hitRange == null) animator.Play("Idle");
@@ -21,17 +23,19 @@ public class CloseMonster : Monster
             animator.Play("Run");
 
             Detection();
-        } 
+        }
         state = hitRange != null ? State.ATTACK : State.IDLE;
     }
-    protected override IEnumerator ATTACK()
+
+    protected override void ATTACK()
     {
+        isAttack = false;
+
         animator.Play("Attack");
 
-        yield return new WaitForSeconds(0.5f);
-        
         state = State.IDLE;
     }
+
     protected override void Detection()
     {
         Vector2 raycastOrigin = transform.position;

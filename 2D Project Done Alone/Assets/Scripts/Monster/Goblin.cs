@@ -6,6 +6,8 @@ public class Goblin : CloseMonster
 {
     protected override void Start()
     {
+        isGetAway = true;
+
         base.Start();
     }
     protected override void FixedUpdate()
