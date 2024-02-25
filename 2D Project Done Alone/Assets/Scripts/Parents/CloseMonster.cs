@@ -23,7 +23,7 @@ public class CloseMonster : Monster
 
             Detection();
         }
-        else state = State.ATTACK;
+        else state = State.ATTACK; 
     }
 
     protected override void ATTACK()
