@@ -25824,8 +25824,24 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3028744232255059598, guid: 24f0c36946ac0485386f0ee7fdd88bcc, type: 3}
+      propertyPath: speed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3028744232255059598, guid: 24f0c36946ac0485386f0ee7fdd88bcc, type: 3}
+      propertyPath: awayRange
+      value: 7.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3028744232255059598, guid: 24f0c36946ac0485386f0ee7fdd88bcc, type: 3}
+      propertyPath: attackTime
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3028744232255059598, guid: 24f0c36946ac0485386f0ee7fdd88bcc, type: 3}
+      propertyPath: chaseRange
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3028744232255059598, guid: 24f0c36946ac0485386f0ee7fdd88bcc, type: 3}
       propertyPath: attackRange
-      value: 12.5
+      value: 17.5
       objectReference: {fileID: 0}
     - target: {fileID: 7747338294061627215, guid: 24f0c36946ac0485386f0ee7fdd88bcc, type: 3}
       propertyPath: m_Name
@@ -25833,11 +25849,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8065542959439767413, guid: 24f0c36946ac0485386f0ee7fdd88bcc, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -28.54
+      value: -28
       objectReference: {fileID: 0}
     - target: {fileID: 8065542959439767413, guid: 24f0c36946ac0485386f0ee7fdd88bcc, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.5
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 8065542959439767413, guid: 24f0c36946ac0485386f0ee7fdd88bcc, type: 3}
       propertyPath: m_LocalPosition.z
@@ -25934,7 +25950,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7352455090251050152, guid: 3a7b37756ff704dbeb451ea07f5ccce2, type: 3}
       propertyPath: speed
-      value: 5
+      value: 7.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7352455090251050152, guid: 3a7b37756ff704dbeb451ea07f5ccce2, type: 3}
+      propertyPath: attackTime
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

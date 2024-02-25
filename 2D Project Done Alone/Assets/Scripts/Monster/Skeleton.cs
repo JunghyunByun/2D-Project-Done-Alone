@@ -8,6 +8,8 @@ public class Skeleton : LongDistanceMonster
     {
         prefabName = "Arrow";
 
+        isGetAway = true;
+
         base.Start();
     }
     protected override void FixedUpdate()

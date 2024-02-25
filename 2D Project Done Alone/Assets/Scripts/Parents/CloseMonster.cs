@@ -17,13 +17,9 @@ public class CloseMonster : Monster
     {
         Collider2D hitRange = Physics2D.OverlapCircle(transform.position, attackRange, layerMask);
 
-        if (hitRange == null)
-        {
-            animator.Play("Run");
-
-            Detection();
-        }
-        else state = State.ATTACK; 
+        if (hitRange == null) Detection();
+        
+        state = hitRange != null ? State.ATTACK : State.IDLE; 
     }
 
     protected override void ATTACK()
@@ -49,6 +45,8 @@ public class CloseMonster : Monster
 
     protected override void Detection()
     {
+        animator.Play("Run");
+
         Vector2 raycastOrigin = transform.position;
         Vector2 diagonalRight = new Vector2(Mathf.Cos(310 * Mathf.Deg2Rad), Mathf.Sin(310 * Mathf.Deg2Rad));
         Vector2 diagonalLeft = new Vector2(Mathf.Cos(230 * Mathf.Deg2Rad), Mathf.Sin(230 * Mathf.Deg2Rad));

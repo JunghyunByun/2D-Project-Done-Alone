@@ -28,9 +28,9 @@ public abstract class Monster : MonoBehaviour
     
     protected virtual void FixedUpdate()
     {
-        if (isGetAway) playerPos = GameObject.Find("Player").transform.position;
+        playerPos = GameObject.Find("Player").transform.position;
 
-        sprite.flipX = playerPos.x > transform.position.x ? false : true;
+        if (isGetAway) sprite.flipX = playerPos.x > transform.position.x ? false : true;
 
         if (HP <= 0) state = State.DIE;
         
