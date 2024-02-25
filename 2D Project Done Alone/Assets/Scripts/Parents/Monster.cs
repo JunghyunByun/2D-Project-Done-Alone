@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class Monster : MonoBehaviour
 {
-    [SerializeField] protected float speed, HP, chaseRange, attackRange, wallRange, groundRange;
+    [SerializeField] protected float speed, HP, attackTime, chaseRange, attackRange, wallRange, groundRange;
     [SerializeField] protected LayerMask layerMask;
     protected enum State { IDLE, CHASE, ATTACK, GETAWAY, DIE }
     protected State state;

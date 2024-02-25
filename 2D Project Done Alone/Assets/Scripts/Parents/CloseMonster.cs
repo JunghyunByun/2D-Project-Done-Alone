@@ -1,12 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public class CloseMonster : Monster
 {
-    [SerializeField] protected float time;
-
     protected override void IDLE()
     {
         Collider2D hitRange = Physics2D.OverlapCircle(transform.position, chaseRange, layerMask);
@@ -43,7 +40,7 @@ public class CloseMonster : Monster
     {
         animator.Play("Attack");
         
-        yield return new WaitForSeconds(time);
+        yield return new WaitForSeconds(attackTime);
 
         isAttack = false;
 
