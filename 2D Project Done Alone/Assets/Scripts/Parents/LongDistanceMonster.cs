@@ -30,8 +30,6 @@ public class LongDistanceMonster : Monster
     {
         if (!isAttack)
         {
-            animator.Play("Idle");
-
             isAttack = true;
 
             StartCoroutine(AttackCoolDown());
@@ -72,8 +70,6 @@ public class LongDistanceMonster : Monster
 
     protected override void Detection()
     {
-        animator.Play("Run");
-
         Vector2 raycastOrigin = focus.transform.position;
         Vector2 diagonalRight = new Vector2(Mathf.Cos(310 * Mathf.Deg2Rad), Mathf.Sin(310 * Mathf.Deg2Rad));
         Vector2 diagonalLeft = new Vector2(Mathf.Cos(230 * Mathf.Deg2Rad), Mathf.Sin(230 * Mathf.Deg2Rad));
@@ -99,12 +95,22 @@ public class LongDistanceMonster : Monster
 
         if (sprite.flipX)
         {
-            if (leftGroundHit.collider != null) transform.position = Vector3.MoveTowards(transform.position, playerPos, isGetAway == true ? speed * Time.deltaTime : -speed * Time.deltaTime);
+            if (leftGroundHit.collider != null)
+            {
+                animator.Play("Run");
+
+                transform.position = Vector3.MoveTowards(transform.position, playerPos, isGetAway == true ? speed * Time.deltaTime : -speed * Time.deltaTime);
+            } 
             else animator.Play("Idle");
         }
         else
         {
-            if (rightGroundHit.collider != null) transform.position = Vector3.MoveTowards(transform.position, playerPos, isGetAway == true ? speed * Time.deltaTime : -speed * Time.deltaTime);
+            if (rightGroundHit.collider != null)
+            {
+                animator.Play("Run");
+
+                transform.position = Vector3.MoveTowards(transform.position, playerPos, isGetAway == true ? speed * Time.deltaTime : -speed * Time.deltaTime);
+            } 
             else animator.Play("Idle");
         }
 
