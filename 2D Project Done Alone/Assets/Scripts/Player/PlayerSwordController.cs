@@ -11,6 +11,7 @@ public class PlayerSwordController : PlayerController
     protected override void Start()
     {
         base.Start();
+        
         swordFocus = transform.Find("SwordFocus");
         swordEffect = transform.Find("Sword Effect").gameObject;
         swordAudio = GetComponent<AudioSource>();

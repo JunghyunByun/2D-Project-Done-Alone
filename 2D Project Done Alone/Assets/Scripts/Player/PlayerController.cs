@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private float speed = 5f;
+    private float speed = 5f, HP;
     private Rigidbody2D playerRigid;
     private Animator animator;
     public SpriteRenderer playerSpriteRenderer;
@@ -31,14 +31,15 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isJump != true)
-        {
-            isJump = true;
+        RaycastHit2D groundHit = Physics2D.Raycast(transform.Find("Ground").position, Vector3.down, 1, LayerMask.GetMask("Ground"));
 
-            animator.SetBool("isJump", isJump);
+        if (Input.GetKeyDown(KeyCode.Space) && isJump != true && groundHit.collider != null)
+        {
+            animator.Play("Jump");
 
             playerRigid.velocity = new Vector2(0f, Mathf.Pow(speed, 2f));
         }
+        Debug.DrawRay(transform.Find("Ground").position, Vector3.down, new Color(0, 1, 0)); 
     }
 
     private void Dash()
@@ -55,20 +56,11 @@ public class PlayerController : MonoBehaviour
     {
         if (h != 0)
         {
-            animator.SetBool("isRun", true);
+            animator.Play("Run");
 
             playerSpriteRenderer.flipX = h < 0;
         }
-        else animator.SetBool("isRun", false);
     }
 
-    protected virtual void OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.collider.CompareTag("Ground"))
-        {
-            isJump = false;
-            
-            animator.SetBool("isJump", isJump);
-        }
-    }
+    protected virtual void OnCollisionEnter2D(Collision2D other) { }
 }
