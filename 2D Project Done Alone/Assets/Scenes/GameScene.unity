@@ -955,7 +955,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerDamage: 10
-  playerHp: 0
+  playerHp: 100
 --- !u!4 &1072053157
 Transform:
   m_ObjectHideFlags: 0

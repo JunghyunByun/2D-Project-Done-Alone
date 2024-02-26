@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class Arrow : MonoBehaviour
@@ -9,7 +8,7 @@ public class Arrow : MonoBehaviour
     private SpriteRenderer arrowSprite;
     private Rigidbody2D arrowRigid;
 
-    void Start()
+    private void Start()
     {
         arrowSprite = GetComponent<SpriteRenderer>();
         arrowRigid = GetComponent<Rigidbody2D>();
@@ -22,4 +21,6 @@ public class Arrow : MonoBehaviour
 
         Destroy(gameObject, 5f);
     }
+
+    private void OnTriggerEnter2D(Collider2D other) { if (other.gameObject.CompareTag("Ground") || other.gameObject.CompareTag("Player")) Destroy(gameObject); }
 }

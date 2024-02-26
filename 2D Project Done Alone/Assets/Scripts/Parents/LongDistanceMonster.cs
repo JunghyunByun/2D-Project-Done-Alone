@@ -15,6 +15,12 @@ public class LongDistanceMonster : Monster
         if (hitRange == null) animator.Play("Idle");
 
         state = hitRange != null ? State.CHASE : State.IDLE;
+
+        if(animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") &&
+           animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
+        {
+            Instantiate(Resources.Load("Prefabs/Arrow"), focus.transform.position, Quaternion.identity);
+        }
     }
 
     protected override void CHASE()
