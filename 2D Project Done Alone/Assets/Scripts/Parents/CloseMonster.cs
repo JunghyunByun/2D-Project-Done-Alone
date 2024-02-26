@@ -88,6 +88,6 @@ public class CloseMonster : Monster
     {
         animator.Play("Die");
 
-        Destroy(gameObject, 5f);
+        Destroy(gameObject, 2f);
     }
 }

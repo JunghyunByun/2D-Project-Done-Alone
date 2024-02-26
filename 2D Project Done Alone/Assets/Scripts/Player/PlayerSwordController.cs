@@ -11,7 +11,7 @@ public class PlayerSwordController : PlayerController
     protected override void Start()
     {
         base.Start();
-        
+
         swordFocus = transform.Find("SwordFocus");
         swordEffect = transform.Find("Sword Effect").gameObject;
         swordAudio = GetComponent<AudioSource>();
@@ -40,7 +40,7 @@ public class PlayerSwordController : PlayerController
         swordEffect.transform.localPosition = pos;
 
         swordEffect.SetActive(true);
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.15f);
 
         swordFocus.rotation = Quaternion.identity;
         swordEffect.SetActive(false);

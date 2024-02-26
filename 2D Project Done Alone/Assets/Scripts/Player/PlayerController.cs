@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -15,7 +17,10 @@ public class PlayerController : MonoBehaviour
     {
         playerRigid = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        playerSpriteRenderer = GetComponent<SpriteRenderer>();
+        playerSpriteRenderer = GetComponent<SpriteRenderer>(); 
+
+        Managers.Input.KeyAction -= OnKeyboard;
+        Managers.Input.KeyAction += OnKeyboard;
     }
 
     protected float GetHorizontal() { return Input.GetAxisRaw("Horizontal"); }
@@ -24,16 +29,20 @@ public class PlayerController : MonoBehaviour
     {
         transform.Translate(GetHorizontal() * speed * Time.deltaTime, 0f, 0f);
 
-        Jump();
-        Dash();
         Animation(GetHorizontal());
+    }
+
+    private void OnKeyboard()
+    {
+        if (Input.GetKeyDown(KeyCode.Space)) Jump();
+        if (Input.GetKeyDown(KeyCode.LeftShift)) Dash();
     }
 
     private void Jump()
     {
         RaycastHit2D groundHit = Physics2D.Raycast(transform.Find("Ground").position, Vector3.down, 1, LayerMask.GetMask("Ground"));
 
-        if (Input.GetKeyDown(KeyCode.Space) && isJump != true && groundHit.collider != null)
+        if (isJump != true && groundHit.collider != null)
         {
             animator.Play("Jump");
 
@@ -44,12 +53,9 @@ public class PlayerController : MonoBehaviour
 
     private void Dash()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-            Vector2 direction = playerSpriteRenderer.flipX ? Vector2.left : Vector2.right;
+        Vector2 direction = playerSpriteRenderer.flipX ? Vector2.left : Vector2.right;
 
-            playerRigid.AddForce(direction * Mathf.Pow(speed, 2f), ForceMode2D.Force);
-        }
+        playerRigid.AddForce(direction * Mathf.Pow(speed, 2f), ForceMode2D.Force);
     }
 
     private void Animation(float h)

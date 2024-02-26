@@ -125,7 +125,9 @@ public class LongDistanceMonster : Monster
 
     protected override void DIE()
     {
-        
+        animator.Play("Die");
+
+        Destroy(gameObject, 2f);
     }
 
     protected override void OnDrawGizmos()
