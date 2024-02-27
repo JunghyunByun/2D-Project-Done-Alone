@@ -19,7 +19,8 @@ public class LongDistanceMonster : Monster
         if(animator.GetCurrentAnimatorStateInfo(0).IsName("Attack") &&
            animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
         {
-            Instantiate(Resources.Load("Prefabs/Arrow"), focus.transform.position, Quaternion.identity);
+            //Instantiate(Resources.Load("Prefabs/Arrow"), focus.transform.position, Quaternion.identity);
+            Managers.Resource.Instantiate("Arrow", focus.transform.position);
         }
     }
 
